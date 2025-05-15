@@ -164,11 +164,22 @@ public class Userinterface {
 
         Vehicle addVehicle = new Vehicle(vin, year, make, model, type, color, odometer, price);
         dealership.addVehicle(addVehicle);
-        DealershipFileManager.saveDealership((dealership));
+        DealershipFileManager.saveDealership(dealership);
     }//Done
 
     private void processRemoveVehicleRequest() {
         //TODO how to delete line of data from a csv ???
+        System.out.println("---Remove a vehicle from the inventory---\n");
+        System.out.print("Vin:");
+        int vin = scanner.nextInt();
+        ArrayList<Vehicle> rmVehicle=dealership.getAllVehicles();
+        for (Vehicle vehicle : rmVehicle) {
+            if (vin == vehicle.getVin()) {
+                dealership.removeVehicle(vehicle);
+                DealershipFileManager.saveDealership(dealership);
+                break;
+            }
+        }
     }
 
     public static void displayVehicles(ArrayList<Vehicle> vehicles) {
